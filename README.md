@@ -10,10 +10,10 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 
 - [bazelisk installed](https://github.com/bazelbuild/bazelisk) (`brew install bazelisk` on mac) - bazel launcher that also manages the bazel installation & version using the [.bazelversion](./.bazelversion) file.
 
-### running all builds
+### building all targets
 
 `bazel build //...`
 
-### running all tests
+### running all test targets
 
 `bazel test //...`
