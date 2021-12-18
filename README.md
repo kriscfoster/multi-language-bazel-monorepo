@@ -2,7 +2,7 @@
 
 I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.build/) for experimentation purposes. You can follow the journey on YouTube.
 
-1. `bazelisk`, `WORKSPACE` & first `BUILD` file - *TODO: link to video*.
+1. [Bazel Tutorial: (Part 1) Getting Started, Bazelisk & our First Build Targets](https://youtu.be/BZYj6yfA6Bs)
 
 ## setup instructions
 
