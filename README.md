@@ -14,7 +14,7 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
    1. Creating simple python application without any external dependencies. 
    1. Bringing dependencies into the mix by creating a Flask application.
    1. Test targets using `py_test` rule.
-   1. TODO: need to look into virtual environment stuff, python version used & maybe building a library & using it as a dep?
+   1. TODO: need to look into virtual environment stuff, python version used.
 
 ## setup instructions
 
