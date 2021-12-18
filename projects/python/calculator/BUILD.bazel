@@ -1,0 +1,4 @@
+py_test(
+  name = "calculator_test",
+  srcs = ["calculator_test.py"]
+)
