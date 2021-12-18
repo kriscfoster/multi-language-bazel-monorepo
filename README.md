@@ -30,7 +30,10 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 
 `bazel test //...`
 
+### calculator library
+
+- `bazel test //projects/calculator/...`
+
 ### python application
 
-- `bazel test //projects/python/...`
 - `bazel run //projects/python:main`
