@@ -15,8 +15,9 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
       1. `py_library` target.
       1. `py_test` target.
    1. Flask application.
-      1. Third party dependencies.
-      1. Dependencies in the monorepo.
+      1. `py_binary` target.
+      1. Using third party dependencies.
+      1. Using dependencies from the monorepo.
    1. Discuss python version, hermetic etc.
 
 ## setup instructions
