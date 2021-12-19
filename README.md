@@ -8,13 +8,16 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
    1. Bazel overview.
    1. Installing & using [bazelisk](https://github.com/bazelbuild/bazelisk).
    1. `WORKSPACE.bazel`, `BUILD.bazel` & creating our first build targets.
-1. [Bazel Tutorial: (Part 2) Python (Creating Build & Test Targets)]()
-   1. Visual Studio Code Extension.
+1. [Bazel Tutorial: (Part 2) Python targets with py_library, py_test, py_binary (internal & external deps)]()
+   1. Enabline Visual Studio Code Extension.
    1. [rules_python](https://github.com/bazelbuild/rules_python).
-   1. Creating simple python application without any external dependencies. 
-   1. Bringing dependencies into the mix by creating a Flask application.
-   1. Test targets using `py_test` rule.
-   1. TODO: need to look into virtual environment stuff, python version used.
+   1. Creating simple python library without any external dependencies. 
+      1. `py_library` target.
+      1. `py_test` target.
+   1. Flask application.
+      1. Third party dependencies.
+      1. Dependencies in the monorepo.
+   1. Discuss python version, hermetic etc.
 
 ## setup instructions
 
