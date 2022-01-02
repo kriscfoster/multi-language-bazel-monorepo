@@ -1,6 +1,6 @@
 # multi-language-bazel-monorepo
 
-![getting started with bazel](https://user-images.githubusercontent.com/17026751/146653297-18db0708-f9e4-4bb3-ba2f-469be7774e25.png)
+![Getting Started with Bazel](https://user-images.githubusercontent.com/17026751/147872728-cba68987-9a5c-4cb6-9777-47c51efc4c75.png)
 
 I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.build/) for experimentation purposes. You can follow the journey on YouTube.
 
@@ -19,6 +19,7 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
       1. Using third party dependencies.
       1. Using dependencies from the monorepo.
    1. Discuss python version, hermetic etc.
+1. [GitHub Actions for Bazel Monorepo - Building & Testing (CI)](https://youtu.be/qiZXFdd8OPo).
 
 ## setup instructions
 
