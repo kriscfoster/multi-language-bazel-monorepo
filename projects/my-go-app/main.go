@@ -4,11 +4,11 @@ import (
     "net/http"
     "log"
     "github.com/gorilla/mux"
-		"github.com/kriscfoster/multi-language-bazel-monorepo/projects/greeter"
+    "github.com/kriscfoster/multi-language-bazel-monorepo/projects/greeter"
 )
 
 func YourHandler(w http.ResponseWriter, r *http.Request) {
-		log.Println("received request")
+    log.Println("received request")
     w.Write([]byte(greeter.Greet()))
 }
 
