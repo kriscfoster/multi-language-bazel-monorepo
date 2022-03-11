@@ -1,7 +1,7 @@
 py_library(
   name = "calculator",
   srcs = ["calculator.py"],
-  visibility = ["//projects/my-python-app:__pkg__"],
+  visibility = ["//projects/python_web:__pkg__"],
 )
 
 py_test(

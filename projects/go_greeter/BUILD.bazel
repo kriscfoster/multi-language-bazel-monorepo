@@ -2,9 +2,9 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "greeter",
-    importpath = "github.com/kriscfoster/multi-language-bazel-monorepo/projects/greeter",
+    importpath = "github.com/kriscfoster/multi-language-bazel-monorepo/projects/go_greeter",
     srcs = ["greeter.go"],
-    visibility = ["//projects/my-go-app:__pkg__"],
+    visibility = ["//projects/go_web:__pkg__"],
 )
 
 go_test(
