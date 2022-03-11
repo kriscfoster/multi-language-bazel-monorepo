@@ -35,10 +35,24 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 
 `bazel test //...`
 
-### calculator library
+### python
 
-- `bazel test //projects/calculator/...`
+#### web app
 
-### python application
+- `bazel run //projects/python_web`
+- http://localhost:5000
 
-- `bazel run //projects/python:main`
+#### calculator library
+
+`bazel test //projects/python_calculator/...`
+
+### go
+
+#### web app
+
+- `bazel run //projects/go_web`
+- http://localhost:8000
+
+#### greeter library
+
+- `bazel test //projects/go_greeter/...`

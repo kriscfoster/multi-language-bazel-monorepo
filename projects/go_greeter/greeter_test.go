@@ -1,4 +1,4 @@
-package greeter
+package go_greeter
 
 import "testing"
 
