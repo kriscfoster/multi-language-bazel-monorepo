@@ -22,26 +22,26 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 1. [GitHub Actions for Bazel Monorepo - Building & Testing (CI)](https://youtu.be/qiZXFdd8OPo).
 1. TODO: Bazel Tutorial: Go targets with go_library, go_test, go_binary (internal & external deps).
 
-### Prerequisites
+## Prerequisites
 
 - [bazelisk installed](https://github.com/bazelbuild/bazelisk) (`brew install bazelisk` on mac) - bazel launcher that also manages the bazel installation & version using the [.bazelversion](./.bazelversion) file.
 
-### Useful Commands
+## Useful Commands
 
-#### Build all targets
+### Build all targets
 
-`bazel build //...`
+- `bazel build //...`
 
-#### Run all test targets
+### Run all test targets
 
-`bazel test //...`
+- `bazel test //...`
 
-#### Run Python web app
+### Run Python web app
 
 - `bazel run //projects/python_web`
 - http://localhost:5000
 
-#### Run Go web app
+### Run Go web app
 
 - `bazel run //projects/go_web`
 - http://localhost:8000
