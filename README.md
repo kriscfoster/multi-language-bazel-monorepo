@@ -20,39 +20,28 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
       1. Using dependencies from the monorepo.
    1. Discuss python version, hermetic etc.
 1. [GitHub Actions for Bazel Monorepo - Building & Testing (CI)](https://youtu.be/qiZXFdd8OPo).
+1. TODO: Bazel Tutorial: Go targets with go_library, go_test, go_binary (internal & external deps).
 
-## setup instructions
-
-### prerequisites
+### Prerequisites
 
 - [bazelisk installed](https://github.com/bazelbuild/bazelisk) (`brew install bazelisk` on mac) - bazel launcher that also manages the bazel installation & version using the [.bazelversion](./.bazelversion) file.
 
-### building all targets
+### Useful Commands
+
+#### Build all targets
 
 `bazel build //...`
 
-### running all test targets
+#### Run all test targets
 
 `bazel test //...`
 
-### python
-
-#### web app
+#### Run Python web app
 
 - `bazel run //projects/python_web`
 - http://localhost:5000
 
-#### calculator library
-
-`bazel test //projects/python_calculator/...`
-
-### go
-
-#### web app
+#### Run Go web app
 
 - `bazel run //projects/go_web`
 - http://localhost:8000
-
-#### greeter library
-
-- `bazel test //projects/go_greeter/...`
