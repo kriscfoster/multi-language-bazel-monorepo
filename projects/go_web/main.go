@@ -5,12 +5,12 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/kriscfoster/multi-language-bazel-monorepo/projects/go_greeter"
+	"github.com/kriscfoster/multi-language-bazel-monorepo/projects/go_hello_world"
 )
 
 func YourHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("Received request")
-	w.Write([]byte(go_greeter.Greet()))
+	w.Write([]byte(go_hello_world.HelloWorld()))
 }
 
 func main() {

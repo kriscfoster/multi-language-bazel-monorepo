@@ -4,7 +4,7 @@ go_binary(
     name = "go_web",
     srcs = ["main.go"],
     deps = [
-      "//projects/go_greeter:greeter",
+      "//projects/go_hello_world",
       "@github_com_gorilla_mux//:mux",
     ]
 )
