@@ -6,3 +6,6 @@ bazel-testlogs
 __pycache__
 
 .idea
+
+node_modules
+yarn.lock

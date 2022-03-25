@@ -1,0 +1,17 @@
+{
+  "name": "multi-language-bazel-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@bazel/jasmine": "5.3.0",
+    "jasmine": "4.0.2",
+    "jasmine-core": "4.0.1"
+  },
+  "scripts": {
+      "build": "bazel build //...",
+      "test": "bazel test //..."
+  },
+  "dependencies": {
+      "express": "4.17.3"
+  }
+}
