@@ -45,3 +45,8 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 
 - `bazel run //projects/go_web`
 - http://localhost:8000
+
+### Run Go web app
+
+- `bazel run //projects/node_web`
+- http://localhost:8080
