@@ -1,6 +1,7 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "js_library")
 load("@npm//@bazel/jasmine:index.bzl", "jasmine_node_test")
 
-filegroup(
+js_library(
     name = "node_calculator",
     srcs = ["calculator.js"],
     visibility = ["//projects/node_web:__pkg__"],
