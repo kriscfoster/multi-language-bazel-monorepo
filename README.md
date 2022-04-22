@@ -51,3 +51,15 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 
 - `bazel run //projects/node_web`
 - http://localhost:8080
+
+### Build & Run NodeJS web app docker image
+```
+➜ bazel run projects/node_web:node_web_image -- --norun
+...
+INFO: Build completed successfully, 1 total action
+Loaded image ID: sha256:XXX
+Tagging YYY as bazel/projects/node_web:node_web_image
+➜
+➜ docker run sha256:XXX
+listening on port 8080
+```
