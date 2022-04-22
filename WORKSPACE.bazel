@@ -99,10 +99,7 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.23.0/rules_docker-v0.23.0.tar.gz"],
 )
 
-load(
-    "@io_bazel_rules_docker//repositories:repositories.bzl",
-    container_repositories = "repositories",
-)
+load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
 container_repositories()
 
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
@@ -111,16 +108,8 @@ container_deps()
 
 ### Loading base docker images for different languages
 
-load(
-    "@io_bazel_rules_docker//nodejs:image.bzl",
-    _nodejs_image_repos = "repositories",
-)
-
+load("@io_bazel_rules_docker//nodejs:image.bzl", _nodejs_image_repos = "repositories")
 _nodejs_image_repos()
 
-load(
-    "@io_bazel_rules_docker//go:image.bzl",
-    _go_image_repos = "repositories",
-)
-
+load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
 _go_image_repos()
