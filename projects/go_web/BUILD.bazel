@@ -1,5 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary")
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
 
 go_binary(
     name = "go_web",
@@ -14,4 +15,9 @@ go_library(
       "@com_github_gorilla_mux//:mux",
     ],
     importpath = "github.com/kriscfoster/multi-language-bazel-monorepo/projects/go_web",
+)
+
+go_image(
+    name = "go_web_image",
+    binary = ":go_web",
 )

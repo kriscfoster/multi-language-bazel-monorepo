@@ -60,6 +60,18 @@ INFO: Build completed successfully, 1 total action
 Loaded image ID: sha256:XXX
 Tagging YYY as bazel/projects/node_web:node_web_image
 ➜
-➜ docker run sha256:XXX
+➜ docker run -p 8080:8080 bazel/projects/node_web:node_web_image
 listening on port 8080
+```
+
+### Build & Run NodeJS web app docker image
+```
+➜ bazel run projects/go_web:go_web_image --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 -- --norun
+...
+INFO: Build completed successfully, 1 total action
+Loaded image ID: sha256:XXX
+Tagging YYY as bazel/projects/go_web:go_web_image
+➜
+➜ docker run -p 8000:8000 bazel/projects/go_web:go_web_image
+2022/05/30 20:35:51 Going to listen on port 8000
 ```
