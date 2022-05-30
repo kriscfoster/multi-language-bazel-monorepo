@@ -54,7 +54,7 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 
 ### Build & Run NodeJS web app docker image
 ```
-➜ bazel run projects/node_web:node_web_image -- --norun
+➜ bazel run projects/node_web:node_web_image --@io_bazel_rules_docker//transitions:enable=yes -- --norun
 ...
 INFO: Build completed successfully, 1 total action
 Loaded image ID: sha256:XXX
