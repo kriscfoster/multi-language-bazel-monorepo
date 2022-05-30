@@ -1,10 +1,25 @@
 load("@python_deps//:requirements.bzl", "requirement")
+load("@io_bazel_rules_docker//python3:image.bzl", py_image="py3_image")
 
-py_binary(
-  name = "python_web",
+py_library(
+  name = "python_web_lib",
   srcs = ["python_web.py"],
   deps = [
     requirement("Flask"),
     "//projects/python_calculator:calculator"
   ],
+)
+
+py_binary(
+  name = "python_web",
+  srcs = ["python_web.py"],
+  deps = [":python_web_lib"],
+  main = "python_web.py",
+)
+
+py_image(
+  name = "python_web_image",
+  srcs = ["python_web.py"],
+  deps = [":python_web_lib"],
+  main = "python_web.py",
 )

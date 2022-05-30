@@ -75,3 +75,16 @@ Tagging YYY as bazel/projects/go_web:go_web_image
 ➜ docker run -p 8000:8000 bazel/projects/go_web:go_web_image
 2022/05/30 20:35:51 Going to listen on port 8000
 ```
+
+### Build & Run Python web app docker image
+```
+➜ bazel run projects/python_web:python_web_image -- --norun
+...
+INFO: Build completed successfully, 1 total action
+Loaded image ID: sha256:XXX
+Tagging YYY as bazel/projects/python_web:python_web_image
+➜
+➜ docker run -p 5000:5000 bazel/projects/python_web:python_web_image
+...
+* Running on http://127.0.0.1:5000
+```
