@@ -1,0 +1,21 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+
+nodejs_binary(
+    name = "ts_app",
+    entry_point = ":index.js",
+    data = []
+)
+
+ts_config(
+    name = "config",
+    src = "tsconfig.json",
+    deps = [],
+)
+
+ts_project(
+    name = "my_code",
+    srcs = glob(["*.ts"]),
+    tsconfig = "config",
+    deps = [],
+)
