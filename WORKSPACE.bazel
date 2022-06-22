@@ -92,12 +92,10 @@ yarn_install(
 
 ### DOCKER
 
-# TODO: fetch from actual release, will need to be at least 0.25.0 which isn't released yet
 http_archive(
     name = "io_bazel_rules_docker",
-    sha256 = "092643b822741ca67669d8e2683199348167bbbee35ca41de12ae2dbac6dea5e",
-    strip_prefix = "rules_docker-d98c13620187eaa71a992fb07accaa9a09504169",
-    urls = ["https://github.com/bazelbuild/rules_docker/archive/d98c13620187eaa71a992fb07accaa9a09504169.tar.gz"],
+    sha256 = "b1e80761a8a8243d03ebca8845e9cc1ba6c82ce7c5179ce2b295cd36f7e394bf",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.25.0/rules_docker-v0.25.0.tar.gz"],
 )
 
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
