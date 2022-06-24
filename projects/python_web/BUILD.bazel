@@ -1,5 +1,6 @@
 load("@python_deps//:requirements.bzl", "requirement")
 load("@io_bazel_rules_docker//python3:image.bzl", py_image="py3_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
 
 py_library(
   name = "python_web_lib",
@@ -22,4 +23,13 @@ py_image(
   srcs = ["python_web.py"],
   deps = [":python_web_lib"],
   main = "python_web.py",
+)
+
+container_push(
+  name = "publish",
+  format = "Docker",
+  registry = "registry.hub.docker.com",
+  repository = "krisfoster96/monorepo-python-web",
+  image = ":python_web_image",
+  tag = "1",
 )

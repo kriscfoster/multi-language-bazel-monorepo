@@ -64,7 +64,7 @@ Tagging YYY as bazel/projects/node_web:node_web_image
 listening on port 8080
 ```
 
-### Build & Run NodeJS web app docker image
+### Build & Run Go web app docker image
 ```
 ➜ bazel run projects/go_web:go_web_image --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 -- --norun
 ...
@@ -87,4 +87,12 @@ Tagging YYY as bazel/projects/python_web:python_web_image
 ➜ docker run -p 5000:5000 bazel/projects/python_web:python_web_image
 ...
 * Running on http://127.0.0.1:5000
+```
+
+### Publishing Python web app docker image
+```
+➜ bazel run projects/python_web:publish         
+...
+INFO: Build completed successfully, 1 total action
+2022/06/24 20:13:33 Successfully pushed Docker image to registry.hub.docker.com/krisfoster96/monorepo-python-web:1 - registry.hub.docker.com/krisfoster96/monorepo-python-web@sha256:024bcf5dd677d6fbce32fcf9d09329f4c80931cc12c90965bb397af1f497bf39
 ```
