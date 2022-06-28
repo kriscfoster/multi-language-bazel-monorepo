@@ -1,11 +1,7 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary")
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
-
-go_binary(
-    name = "go_web",
-    embed = [":go_web_lib"],
-)
+load("@bazoku//:bazoku.bzl", "bazoku")
 
 go_library(
     name = "go_web_lib",
@@ -17,7 +13,18 @@ go_library(
     importpath = "github.com/kriscfoster/multi-language-bazel-monorepo/projects/go_web",
 )
 
+go_binary(
+    name = "go_web",
+    embed = [":go_web_lib"],
+)
+
 go_image(
     name = "go_web_image",
     binary = ":go_web",
+)
+
+bazoku(
+    name = "bazoku-deployment",
+    heroku_app_name = "my-bazoku-app",
+    binary = ":go_web"
 )

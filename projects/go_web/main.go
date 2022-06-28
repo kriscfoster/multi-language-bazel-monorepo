@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 	"github.com/kriscfoster/multi-language-bazel-monorepo/projects/go_hello_world"
@@ -13,12 +14,21 @@ func YourHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(go_hello_world.HelloWorld()))
 }
 
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return "8080"
+	}
+
+	return port
+}
+
 func main() {
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.
 	r.HandleFunc("/", YourHandler)
-
 	// Bind to a port and pass our router in
-	log.Println("Going to listen on port 8000")
-	log.Fatal(http.ListenAndServe(":8000", r))
+	port := getPort()
+	log.Println("Going to listen on port: " + port)
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }

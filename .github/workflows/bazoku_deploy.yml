@@ -1,0 +1,27 @@
+name: bazoku deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bazelbuild/setup-bazelisk@v1
+      - run: git config --global user.name ${{ secrets.USERNAME  }}
+      - run: git config --global user.email ${{ secrets.EMAIL }}
+      - uses: extractions/netrc@v1
+        with:
+          machine: git.heroku.com
+          username: ${{ secrets.EMAIL }}
+          password: ${{ secrets.HEROKU_API_KEY }}
+      - uses: extractions/netrc@v1
+        with:
+          machine: api.heroku.com
+          username: ${{ secrets.EMAIL }}
+          password: ${{ secrets.HEROKU_API_KEY }}
+      - run: bazel run projects/go_web:bazoku-deployment
