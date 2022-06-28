@@ -118,6 +118,8 @@ _py_image_repos()
 
 ### BAZOKU
 
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 http_archive(
     name = "bazoku",
     sha256 = "65c8d074f4aa0b0604142ce540d0d8383c3781f7609ac490bd7b4023e75b48f8",
