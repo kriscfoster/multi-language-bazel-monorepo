@@ -115,3 +115,14 @@ _go_image_repos()
 
 load("@io_bazel_rules_docker//python3:image.bzl", _py_image_repos = "repositories")
 _py_image_repos()
+
+### BAZOKU
+
+http_archive(
+    name = "bazoku",
+    sha256 = "65c8d074f4aa0b0604142ce540d0d8383c3781f7609ac490bd7b4023e75b48f8",
+    urls = ["https://github.com/salesforce/bazoku/releases/download/v0.1.0/bazoku-v0.1.0.tar.gz"],
+)
+
+load("@bazoku//tools:deps.bzl", "bazoku_deps")
+bazoku_deps()
