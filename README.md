@@ -40,6 +40,10 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 - `bazel run //projects/node_web`
 - http://localhost:8080
 
+### Run TypeScript app
+
+- `bazel run //projects/ts_app`
+
 ### Build & Run NodeJS web app docker image
 ```
 ➜ bazel run projects/node_web:node_web_image --@io_bazel_rules_docker//transitions:enable=yes -- --norun
@@ -83,4 +87,11 @@ Tagging YYY as bazel/projects/python_web:python_web_image
 ...
 INFO: Build completed successfully, 1 total action
 2022/06/24 20:13:33 Successfully pushed Docker image to registry.hub.docker.com/krisfoster96/monorepo-python-web:1 - registry.hub.docker.com/krisfoster96/monorepo-python-web@sha256:024bcf5dd677d6fbce32fcf9d09329f4c80931cc12c90965bb397af1f497bf39
+```
+
+### Deploying Go web app to Heroku
+
+```
+➜ bazel** run projects/go_web:bazoku-deployment --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64
+...
 ```
