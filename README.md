@@ -10,6 +10,7 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 1. [Bazel & Go Tutorial: Targets with go_library, go_test & go_binary (internal & external deps)](https://youtu.be/DB_kWimE2bw).
 1. [Bazel & NodeJS Tutorial: library, test & nodejs_binary (internal & external deps)](https://youtu.be/lmWjRhFhvSc).
 1. [Bazel & Docker Tutorial: Building container images with bazel (local & remote registry)](https://youtu.be/hLD6vKl4Txc).
+1. [Deploying from a Bazel Monorepo to Heroku](https://youtu.be/AHvON-xl_Ds).
 
 ## Prerequisites
 
