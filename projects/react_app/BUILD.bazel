@@ -1,5 +1,5 @@
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
-load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin"
+load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin")
 load("@npm//react-scripts:index.bzl", "react_scripts")
 
 # We don't want to teach react-scripts to include from multiple directories
