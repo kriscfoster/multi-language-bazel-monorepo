@@ -46,6 +46,10 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 
 - `bazel run //projects/ts_app`
 
+### Run React app
+
+- `bazel run //projects/react_app:start`
+
 ### Build & Run NodeJS web app docker image
 ```
 ➜ bazel run projects/node_web:node_web_image --@io_bazel_rules_docker//transitions:enable=yes -- --norun
