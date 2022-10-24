@@ -1082,6 +1082,28 @@
     c8 "~7.5.0"
     jasmine-reporters "~2.5.0"
 
+"@bazel/runfiles@^5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@bazel/runfiles/-/runfiles-5.7.0.tgz#e0ea75267808f78d0dedaff5e772e6a088250d8f"
+  integrity sha512-BfmbGuMpqkBNtAmllCrl70YAHo6OrCtcGzakV6KMBUBXzeGl22qRWHFhDvoWgeMKTjhbcywMooPg2Udq9MoVfQ==
+
+"@bazel/typescript@^5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@bazel/typescript/-/typescript-5.7.0.tgz#3f888c603bf5f159dfb4c0c38584fb31d248d5a2"
+  integrity sha512-5c06vi2rQqd75GieqYGsNVon3tnkvbjMlVLJuwJ5/VtC9uOXKlCwrqxV8tbx789PTTtACNYzwKJTVW++58tgDA==
+  dependencies:
+    "@bazel/worker" "5.7.0"
+    semver "5.6.0"
+    source-map-support "0.5.9"
+    tsutils "3.21.0"
+
+"@bazel/worker@5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@bazel/worker/-/worker-5.7.0.tgz#d121261ee1833c5f5858f818f0e4d9a2d8e2c3c5"
+  integrity sha512-VqTG+0gsgXM07q+HiQcSAggNnAzjLei8lzlJQ+mey12KGI4AbNJ1vxlk2pnw9BZdckfe2rRzwkF44B5SNqIgSQ==
+  dependencies:
+    google-protobuf "^3.6.1"
+
 "@bcoe/v8-coverage@^0.2.3":
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
@@ -4771,6 +4793,11 @@ globby@^11.0.4, globby@^11.1.0:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
+google-protobuf@^3.6.1:
+  version "3.21.2"
+  resolved "https://registry.yarnpkg.com/google-protobuf/-/google-protobuf-3.21.2.tgz#4580a2bea8bbb291ee579d1fefb14d6fa3070ea4"
+  integrity sha512-3MSOYFO5U9mPGikIYCzK0SaThypfGgS6bHqrUGXG3DPHCrb+txNqeEcns1W0lkGfk0rCyNXm7xB9rMxnCiZOoA==
+
 graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, graceful-fs@^4.2.6, graceful-fs@^4.2.9:
   version "4.2.10"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
@@ -8020,6 +8047,11 @@ selfsigned@^2.1.1:
   dependencies:
     node-forge "^1"
 
+semver@5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
+  integrity sha512-RS9R6R35NYgQn++fkDWaOmqGoj4Ek9gGs+DPxNUZKuwE183xjJroKvyo1IzVFeXvUrvmALy6FWD5xrdJT25gMg==
+
 semver@^6.0.0, semver@^6.1.1, semver@^6.1.2, semver@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
@@ -8200,6 +8232,14 @@ source-map-loader@^3.0.0:
     abab "^2.0.5"
     iconv-lite "^0.6.3"
     source-map-js "^1.0.1"
+
+source-map-support@0.5.9:
+  version "0.5.9"
+  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.9.tgz#41bc953b2534267ea2d605bccfa7bfa3111ced5f"
+  integrity sha512-gR6Rw4MvUlYy83vP0vxoVNzM6t8MUXqNuRsuBmBHQDu1Fh6X015FrLdgoDKcNdkwGubozq0P4N0Q37UyFVr1EA==
+  dependencies:
+    buffer-from "^1.0.0"
+    source-map "^0.6.0"
 
 source-map-support@^0.5.6, source-map-support@~0.5.20:
   version "0.5.21"
@@ -8684,7 +8724,7 @@ tslib@^2.0.3:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
 
-tsutils@^3.21.0:
+tsutils@3.21.0, tsutils@^3.21.0:
   version "3.21.0"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.21.0.tgz#b48717d394cea6c1e096983eed58e9d61715b623"
   integrity sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==
@@ -8739,6 +8779,11 @@ typedarray-to-buffer@^3.1.5:
   integrity sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==
   dependencies:
     is-typedarray "^1.0.0"
+
+typescript@^4.8.4:
+  version "4.8.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
+  integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
