@@ -7,23 +7,12 @@ workspace(
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-### PYTHON
-
 http_archive(
     name = "rules_python",
     sha256 = "b593d13bb43c94ce94b483c2858e53a9b811f6f10e1e0eedc61073bd90e58d9c",
     strip_prefix = "rules_python-0.12.0",
     url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.12.0.tar.gz",
 )
-
-load("@rules_python//python:pip.bzl", "pip_install")
-
-pip_install(
-   name = "pip",
-   requirements = "//third_party:requirements.txt",
-)
-
-### GO
 
 http_archive(
     name = "io_bazel_rules_go",
@@ -43,6 +32,33 @@ http_archive(
     ],
 )
 
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "c29944ba9b0b430aadcaf3bf2570fece6fc5ebfb76df145c6cdad40d65c20811",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.7.0/rules_nodejs-5.7.0.tar.gz"],
+)
+
+http_archive(
+    name = "io_bazel_rules_docker",
+    sha256 = "b1e80761a8a8243d03ebca8845e9cc1ba6c82ce7c5179ce2b295cd36f7e394bf",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.25.0/rules_docker-v0.25.0.tar.gz"],
+)
+
+http_archive(
+    name = "bazoku",
+    sha256 = "bb12e93d3319c670427decaa2240e1c2afc3e09ffd179bf4e11210313b9be6ba",
+    urls = ["https://github.com/salesforce/bazoku/releases/download/v0.2.0/bazoku-v0.2.0.tar.gz"],
+)
+
+### Python Setup
+load("@rules_python//python:pip.bzl", "pip_install")
+
+pip_install(
+   name = "pip",
+   requirements = "//third_party:requirements.txt",
+)
+
+### Golang Setup
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
 
@@ -63,14 +79,7 @@ go_register_toolchains(version = "1.18")
 
 gazelle_dependencies(go_repository_default_config = "@//:WORKSPACE.bazel")
 
-### NODEJS
-
-http_archive(
-    name = "build_bazel_rules_nodejs",
-    sha256 = "c29944ba9b0b430aadcaf3bf2570fece6fc5ebfb76df145c6cdad40d65c20811",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.7.0/rules_nodejs-5.7.0.tar.gz"],
-)
-
+### NodeJS Setup
 load("@build_bazel_rules_nodejs//:repositories.bzl", "build_bazel_rules_nodejs_dependencies")
 
 build_bazel_rules_nodejs_dependencies()
@@ -88,14 +97,7 @@ yarn_install(
     yarn_lock = "//:yarn.lock",
 )
 
-### DOCKER
-
-http_archive(
-    name = "io_bazel_rules_docker",
-    sha256 = "b1e80761a8a8243d03ebca8845e9cc1ba6c82ce7c5179ce2b295cd36f7e394bf",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.25.0/rules_docker-v0.25.0.tar.gz"],
-)
-
+### Docker Setup
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
 container_repositories()
 
@@ -114,13 +116,6 @@ _go_image_repos()
 load("@io_bazel_rules_docker//python3:image.bzl", _py_image_repos = "repositories")
 _py_image_repos()
 
-### BAZOKU
-
-http_archive(
-    name = "bazoku",
-    sha256 = "bb12e93d3319c670427decaa2240e1c2afc3e09ffd179bf4e11210313b9be6ba",
-    urls = ["https://github.com/salesforce/bazoku/releases/download/v0.2.0/bazoku-v0.2.0.tar.gz"],
-)
-
+### Bazoku Setup
 load("@bazoku//tools:deps.bzl", "bazoku_deps")
 bazoku_deps()
