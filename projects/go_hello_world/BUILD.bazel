@@ -2,13 +2,13 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "go_hello_world",
-    importpath = "github.com/kriscfoster/multi-language-bazel-monorepo/projects/go_hello_world",
     srcs = ["hello_world.go"],
+    importpath = "github.com/kriscfoster/multi-language-bazel-monorepo/projects/go_hello_world",
     visibility = ["//projects/go_web:__pkg__"],
 )
 
 go_test(
-  name = "go_hello_world_test",
-  srcs = ["hello_world_test.go"],
-  embed = [":go_hello_world"]
+    name = "go_hello_world_test",
+    srcs = ["hello_world_test.go"],
+    embed = [":go_hello_world"],
 )

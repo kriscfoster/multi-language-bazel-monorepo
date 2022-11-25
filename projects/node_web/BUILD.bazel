@@ -5,17 +5,17 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 nodejs_image(
     name = "node_web_image",
     binary = "node_web",
-    node_repository_name = "nodejs_linux_amd64",
     include_node_repo_args = False,
+    node_repository_name = "nodejs_linux_amd64",
 )
 
 nodejs_binary(
     name = "node_web",
-    entry_point = ":index.js",
     data = [
-      "//projects/node_calculator",
-      "@npm//express"
+        "//projects/node_calculator",
+        "@npm//express",
     ],
+    entry_point = ":index.js",
     templated_args = [
         "--nobazel_run_linker",
         "--nobazel_node_patches",
