@@ -13,6 +13,7 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 7. [Bazel & Docker Tutorial: Building container images with bazel (local & remote registry)](https://youtu.be/hLD6vKl4Txc).
 8. [Deploying from a Bazel Monorepo to Heroku](https://youtu.be/AHvON-xl_Ds).
 9. [Using Gazelle to Improve Multi-Language Bazel Monorepo](https://youtu.be/MUP35hfK0q4).
+10. [Bazel & Java Tutorial: java_library & java_binary (internal & external dependencies)](https://youtu.be/HPTzVHOcins).
 
 ## Prerequisites
 

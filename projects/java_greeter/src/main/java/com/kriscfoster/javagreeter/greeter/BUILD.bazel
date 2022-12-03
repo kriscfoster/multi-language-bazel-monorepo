@@ -1,0 +1,6 @@
+java_library(
+    name = "java_greeter",
+    srcs = ["Greeter.java"],
+    deps = ["@maven//:com_github_javafaker_javafaker"],
+    visibility = ["//projects/java_greeter/src/main/java/com/kriscfoster/javagreeter/main:__subpackages__"]
+)
