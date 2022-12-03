@@ -24,9 +24,17 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 
 - `bazel build //...`
 
-### Run all test targets
+### Test all test targets
 
 - `bazel test //...`
+
+### Sync Go Dependencies with `go.mod`
+
+- `bazel run //:gazelle-update-repos`
+
+### Format BUILD.bazel files (completely generates BUILd.bazel files for go projects)
+
+- `bazel run //:gazelle`
 
 ### Run Python web app
 
