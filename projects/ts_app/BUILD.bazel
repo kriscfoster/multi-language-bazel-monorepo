@@ -3,8 +3,8 @@ load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
 
 nodejs_binary(
     name = "ts_app",
+    data = [],
     entry_point = ":index.js",
-    data = []
 )
 
 ts_config(

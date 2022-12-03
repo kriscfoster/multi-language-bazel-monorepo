@@ -54,24 +54,17 @@ http_archive(
 load("@rules_python//python:pip.bzl", "pip_install")
 
 pip_install(
-   name = "pip",
-   requirements = "//third_party:requirements.txt",
+    name = "pip",
+    requirements = "//third_party:requirements.txt",
 )
 
 ### Golang Setup
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("//:go_deps.bzl", "go_dependencies")
 
-############################################################
-# Define your own dependencies here using go_repository.
-# Else, dependencies declared by rules_go/gazelle will be used.
-# The first declaration of an external repository "wins".
-############################################################
-go_repository(
-    name = "com_github_gorilla_mux",
-    importpath = "github.com/gorilla/mux",
-    tag = "v1.8.0",
-)
+# gazelle:repository_macro go_deps.bzl%go_dependencies
+go_dependencies()
 
 go_rules_dependencies()
 
@@ -86,6 +79,7 @@ build_bazel_rules_nodejs_dependencies()
 
 # fetches nodejs, npm, and yarn
 load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories")
+
 node_repositories()
 
 load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
@@ -99,6 +93,7 @@ yarn_install(
 
 ### Docker Setup
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
+
 container_repositories()
 
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
@@ -108,14 +103,18 @@ container_deps()
 ### Loading base docker images for different languages
 
 load("@io_bazel_rules_docker//nodejs:image.bzl", _nodejs_image_repos = "repositories")
+
 _nodejs_image_repos()
 
 load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
+
 _go_image_repos()
 
 load("@io_bazel_rules_docker//python3:image.bzl", _py_image_repos = "repositories")
+
 _py_image_repos()
 
 ### Bazoku Setup
 load("@bazoku//tools:deps.bzl", "bazoku_deps")
+
 bazoku_deps()

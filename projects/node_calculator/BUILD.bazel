@@ -11,6 +11,6 @@ jasmine_node_test(
     name = "calculator_test",
     srcs = ["calculator.spec.js"],
     data = [
-      ":node_calculator",
-    ]
+        ":node_calculator",
+    ],
 )

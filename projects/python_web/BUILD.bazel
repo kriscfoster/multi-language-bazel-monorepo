@@ -1,35 +1,35 @@
 load("@pip//:requirements.bzl", "requirement")
-load("@io_bazel_rules_docker//python3:image.bzl", py_image="py3_image")
+load("@io_bazel_rules_docker//python3:image.bzl", py_image = "py3_image")
 load("@io_bazel_rules_docker//container:container.bzl", "container_push")
 
 py_library(
-  name = "python_web_lib",
-  srcs = ["python_web.py"],
-  deps = [
-    requirement("Flask"),
-    "//projects/python_calculator:calculator"
-  ],
+    name = "python_web_lib",
+    srcs = ["python_web.py"],
+    deps = [
+        requirement("Flask"),
+        "//projects/python_calculator:calculator",
+    ],
 )
 
 py_binary(
-  name = "python_web",
-  srcs = ["python_web.py"],
-  deps = [":python_web_lib"],
-  main = "python_web.py",
+    name = "python_web",
+    srcs = ["python_web.py"],
+    main = "python_web.py",
+    deps = [":python_web_lib"],
 )
 
 py_image(
-  name = "python_web_image",
-  srcs = ["python_web.py"],
-  deps = [":python_web_lib"],
-  main = "python_web.py",
+    name = "python_web_image",
+    srcs = ["python_web.py"],
+    main = "python_web.py",
+    deps = [":python_web_lib"],
 )
 
 container_push(
-  name = "publish",
-  format = "Docker",
-  registry = "registry.hub.docker.com",
-  repository = "krisfoster96/monorepo-python-web",
-  image = ":python_web_image",
-  tag = "1",
+    name = "publish",
+    format = "Docker",
+    image = ":python_web_image",
+    registry = "registry.hub.docker.com",
+    repository = "krisfoster96/monorepo-python-web",
+    tag = "1",
 )
