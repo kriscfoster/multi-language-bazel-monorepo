@@ -1,6 +1,6 @@
-package com.kriscfoster.javagreeter.main;
+package com.kriscfoster.main;
 
-import com.kriscfoster.javagreeter.greeter.Greeter;
+import com.kriscfoster.greeter.Greeter;
 
 class Main {
     public static void main(String[] args) {

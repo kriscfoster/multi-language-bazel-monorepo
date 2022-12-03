@@ -1,4 +1,4 @@
-package com.kriscfoster.javagreeter.greeter;
+package com.kriscfoster.greeter;
 
 import com.github.javafaker.Faker;
 
