@@ -14,6 +14,7 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 8. [Deploying from a Bazel Monorepo to Heroku](https://youtu.be/AHvON-xl_Ds).
 9. [Using Gazelle to Improve Multi-Language Bazel Monorepo](https://youtu.be/MUP35hfK0q4).
 10. [Bazel & Java Tutorial: java_library & java_binary (internal & external dependencies)](https://youtu.be/HPTzVHOcins).
+11. [Bazel & Docker: Using Custom Base Images](https://youtu.be/thYPUrhA82A).
 
 ## Prerequisites
 
@@ -45,7 +46,7 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 ### Run Go web app
 
 - `bazel run //projects/go_web`
-- http://localhost:8000
+- http://localhost:8080
 
 ### Run NodeJS web app
 
@@ -80,8 +81,20 @@ INFO: Build completed successfully, 1 total action
 Loaded image ID: sha256:XXX
 Tagging YYY as bazel/projects/go_web:go_web_image
 ➜
-➜ docker run -p 8000:8000 bazel/projects/go_web:go_web_image
-2022/05/30 20:35:51 Going to listen on port 8000
+➜ docker run -p 8080:8080 bazel/projects/go_web:go_web_image
+2022/05/30 20:35:51 Going to listen on port 8080
+```
+
+### Build & Run Go web app docker image (custom base)
+```
+➜ bazel run projects/go_web:go_web_image_custom_base --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 -- --norun
+...
+INFO: Build completed successfully, 1 total action
+Loaded image ID: sha256:XXX
+Tagging YYY as bazel/projects/go_web:go_web_image_custom_base
+➜
+➜ docker run -p 8080:880 bazel/projects/go_web:go_web_image_custom_base
+2023/03/15 21:29:46 Going to listen on port 8080
 ```
 
 ### Build & Run Python web app docker image
