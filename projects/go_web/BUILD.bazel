@@ -1,5 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@bazoku//:bazoku.bzl", "bazoku")
 
 go_library(
@@ -19,9 +20,23 @@ go_binary(
     visibility = ["//visibility:public"],
 )
 
+# using base image from dockerhub
 go_image(
     name = "go_web_image",
     binary = ":go_web",
+    base = "@go_base_image//image",
+)
+
+container_image(
+    name = "custom_go_web_base_image",
+    base = "@custom_go_web_dockerfile//image:dockerfile_image.tar",
+)
+
+# using base image defined in this repo
+go_image(
+    name = "go_web_image_custom_base",
+    binary = ":go_web",
+    base = ":custom_go_web_base_image",
 )
 
 bazoku(
