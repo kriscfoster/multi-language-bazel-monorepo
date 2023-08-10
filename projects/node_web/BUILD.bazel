@@ -1,14 +1,5 @@
-load("@aspect_rules_js//js:defs.bzl", "js_binary")
-load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@io_bazel_rules_docker//container:layer.bzl", "container_layer")
-load("@aspect_rules_js//js:defs.bzl", "js_library", "js_binary", "js_image_layer")
-
-# nodejs_image(
-#     name = "node_web_image",
-#     binary = "node_web",
-#     include_node_repo_args = False,
-#     node_repository_name = "nodejs_linux_amd64",
-# )
+load("@aspect_rules_js//js:defs.bzl", "js_binary", "js_image_layer")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
 
 js_binary(
     name = "node_web",
@@ -25,34 +16,19 @@ js_image_layer(
     root = "/app",
 )
 
-filegroup(
-    name = "app_tar",
-    srcs = [":layers"],
-    output_group = "app",
-)
-
-container_layer(
-    name = "app_layer",
-    tars = [":app_tar"],
-)
-
-filegroup(
-    name = "node_modules_tar",
-    srcs = [":layers"],
-    output_group = "node_modules",
-)
-
-container_layer(
-    name = "node_modules_layer",
-    tars = [":node_modules_tar"],
-)
-
-container_image(
-    name = "node_web_image",
-    entrypoint = ["sleep", "9999"],
-    # cmd = ["/app/projects/node_web/node_web"],
-    layers = [
-        ":app_layer",
-        ":node_modules_layer",
+oci_image(
+    name = "oci_image",
+    # js_binary depends on bash so we have to use a base image that has bash
+    base = "@debian_base",
+    cmd = ["/app/projects/node_web/node_web"],
+    entrypoint = ["bash"],
+    tars = [
+        ":layers",
     ],
+)
+
+oci_tarball(
+    name = "oci_tarball",
+    image = ":oci_image",
+    repo_tags = ["projects/node_web:oci_tarball"],
 )

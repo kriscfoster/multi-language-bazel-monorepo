@@ -218,6 +218,13 @@ oci_pull(
     platforms = ["linux/amd64"],
 )
 
+oci_pull(
+    name = "debian_base",
+    digest = "sha256:3d868b5eb908155f3784317b3dda2941df87bbbbaa4608f84881de66d9bb297b",
+    image = "debian",
+    platforms = ["linux/amd64",],
+)
+
 # oci_pull(
 #     name = "distroless_base",
 #     digest = "sha256:161a1d97d592b3f1919801578c3a47c8e932071168a96267698f4b669c24c76d",
