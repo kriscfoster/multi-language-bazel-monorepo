@@ -106,6 +106,13 @@ http_archive(
     url = "https://github.com/aspect-build/rules_jest/releases/download/v0.19.5/rules_jest-v0.19.5.tar.gz",
 )
 
+http_archive(
+    name = "aspect_rules_ts",
+    sha256 = "4c3f34fff9f96ffc9c26635d8235a32a23a6797324486c7d23c1dfa477e8b451",
+    strip_prefix = "rules_ts-1.4.5",
+    url = "https://github.com/aspect-build/rules_ts/releases/download/v1.4.5/rules_ts-v1.4.5.tar.gz",
+)
+
 load("@aspect_rules_jest//jest:dependencies.bzl", "rules_jest_dependencies")
 rules_jest_dependencies()
 
@@ -131,6 +138,17 @@ npm_translate_lock(
 load("@npm//:repositories.bzl", "npm_repositories")
 
 npm_repositories()
+
+load("@aspect_rules_ts//ts:repositories.bzl", "rules_ts_dependencies")
+
+rules_ts_dependencies(
+    # This keeps the TypeScript version in-sync with the editor, which is typically best.
+    ts_version_from = "//:package.json",
+
+    # Alternatively, you could pick a specific version, or use
+    # load("@aspect_rules_ts//ts:repositories.bzl", "LATEST_TYPESCRIPT_VERSION")
+    # ts_version = LATEST_TYPESCRIPT_VERSION
+)
 
 ### Docker Setup
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
