@@ -5,7 +5,10 @@
   "devDependencies": {
     "@bazel/jasmine": "5.3.0",
     "jasmine": "4.0.2",
-    "jasmine-core": "4.0.1"
+    "jasmine-core": "4.0.1",
+    "jest": "^27.5.1",
+    "jest-cli": "^29.6.1",
+    "jest-junit": "^16.0.0"
   },
   "scripts": {
     "build": "bazel build //...",
