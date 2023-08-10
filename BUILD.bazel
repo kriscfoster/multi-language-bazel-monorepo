@@ -1,12 +1,9 @@
-load("@bazel_gazelle//:def.bzl", "DEFAULT_LANGUAGES", "gazelle", "gazelle_binary")
+load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@io_bazel_rules_go//go:def.bzl", "nogo")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 
 # gazelle:prefix github.com/kriscfoster/multi-language-bazel-monorepo
-gazelle(
-    name = "gazelle",
-    gazelle = ":gazelle_bin",
-)
+gazelle(name = "gazelle")
 
 gazelle(
     name = "gazelle-update-repos",
@@ -16,13 +13,6 @@ gazelle(
         "-prune",
     ],
     command = "update-repos",
-)
-
-gazelle_binary(
-    name = "gazelle_bin",
-    languages = DEFAULT_LANGUAGES + [
-        "@contrib_rules_jvm//java/gazelle",
-    ],
 )
 
 npm_link_all_packages(name = "npm")

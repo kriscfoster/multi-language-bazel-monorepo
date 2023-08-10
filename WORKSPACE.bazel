@@ -68,15 +68,6 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_jvm_external/archive/refs/tags/%s.zip" % RULES_JVM_EXTERNAL_TAG,
 )
 
-http_archive(
-    name = "contrib_rules_jvm",
-    sha256 = "9082d3fb20724c683cd7f909cff2711a5d40fd8529a40247f879e14aa917a8b4",
-    strip_prefix = "rules_jvm-0.17.0",
-    urls = [
-        "https://github.com/bazel-contrib/rules_jvm/archive/v0.17.0.tar.gz",
-    ]
-)
-
 ### Python Setup
 load("@rules_python//python:pip.bzl", "pip_install")
 
@@ -214,17 +205,3 @@ maven_install(
 
 load("@maven//:defs.bzl", "pinned_maven_install")
 pinned_maven_install()
-
-load("@contrib_rules_jvm//:repositories.bzl", "contrib_rules_jvm_deps", "contrib_rules_jvm_gazelle_deps")
-
-contrib_rules_jvm_deps()
-
-contrib_rules_jvm_gazelle_deps()
-
-load("@contrib_rules_jvm//:setup.bzl", "contrib_rules_jvm_setup")
-
-contrib_rules_jvm_setup()
-
-load("@contrib_rules_jvm//:gazelle_setup.bzl", "contrib_rules_jvm_gazelle_setup")
-
-contrib_rules_jvm_gazelle_setup()
