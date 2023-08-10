@@ -1,6 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
-load("@io_bazel_rules_docker//go:image.bzl", "go_image")
-load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
 load("@bazoku//:bazoku.bzl", "bazoku")
 
 go_library(
@@ -20,23 +20,23 @@ go_binary(
     visibility = ["//visibility:public"],
 )
 
-# using base image from dockerhub
-go_image(
-    name = "go_web_image",
-    binary = ":go_web",
-    base = "@go_base_image//image",
+pkg_tar(
+    name = "tar",
+    srcs = [":go_web"],
 )
 
-container_image(
-    name = "custom_go_web_base_image",
-    base = "@custom_go_web_dockerfile//image:dockerfile_image.tar",
+oci_image(
+    name = "oci_image",
+    base = "@distroless_base",
+    tars = [":tar"],
+    # with :debug distroless image, entrypoint can be changed to "sh" for debug purposes
+    entrypoint = ["go_web_/go_web"],
 )
 
-# using base image defined in this repo
-go_image(
-    name = "go_web_image_custom_base",
-    binary = ":go_web",
-    base = ":custom_go_web_base_image",
+oci_tarball(
+    name = "oci_tarball",
+    image = ":oci_image",
+    repo_tags = ["projects/go_web:oci_tarball"],
 )
 
 bazoku(
