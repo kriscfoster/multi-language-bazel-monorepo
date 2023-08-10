@@ -75,26 +75,12 @@ listening on port 8080
 
 ### Build & Run Go web app docker image
 ```
-➜ bazel run projects/go_web:go_web_image --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 -- --norun
+➜ bazel run projects/go_web:oci_tarball --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64
 ...
-INFO: Build completed successfully, 1 total action
-Loaded image ID: sha256:XXX
-Tagging YYY as bazel/projects/go_web:go_web_image
+Loaded image: projects/go_web:oci_tarball
 ➜
-➜ docker run -p 8080:8080 bazel/projects/go_web:go_web_image
+➜ docker run -p 8080:8080 projects/go_web:oci_tarball
 2022/05/30 20:35:51 Going to listen on port 8080
-```
-
-### Build & Run Go web app docker image (custom base)
-```
-➜ bazel run projects/go_web:go_web_image_custom_base --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 -- --norun
-...
-INFO: Build completed successfully, 1 total action
-Loaded image ID: sha256:XXX
-Tagging YYY as bazel/projects/go_web:go_web_image_custom_base
-➜
-➜ docker run -p 8080:880 bazel/projects/go_web:go_web_image_custom_base
-2023/03/15 21:29:46 Going to listen on port 8080
 ```
 
 ### Build & Run Python web app docker image

@@ -1,1 +1,0 @@
-build --@io_bazel_rules_docker//transitions:enable=no

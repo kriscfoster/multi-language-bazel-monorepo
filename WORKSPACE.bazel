@@ -38,18 +38,12 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.7.0/rules_nodejs-5.7.0.tar.gz"],
 )
 
-http_archive(
-    name = "io_bazel_rules_docker",
-    sha256 = "b1e80761a8a8243d03ebca8845e9cc1ba6c82ce7c5179ce2b295cd36f7e394bf",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.25.0/rules_docker-v0.25.0.tar.gz"],
-)
-
 
 http_archive(
     name = "rules_oci",
-    sha256 = "48642588e91e992772b94de06234da6601854fda0ee32a91ce8ef303cf5e5837",
-    strip_prefix = "rules_oci-0.3.7",
-    url = "https://github.com/bazel-contrib/rules_oci/releases/download/v0.3.7/rules_oci-v0.3.7.tar.gz",
+    sha256 = "176e601d21d1151efd88b6b027a24e782493c5d623d8c6211c7767f306d655c8",
+    strip_prefix = "rules_oci-1.2.0",
+    url = "https://github.com/bazel-contrib/rules_oci/releases/download/v1.2.0/rules_oci-v1.2.0.tar.gz",
 )
 
 http_archive(
@@ -118,50 +112,6 @@ yarn_install(
     yarn_lock = "//:yarn.lock",
 )
 
-### Docker Setup
-load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
-
-container_repositories()
-
-load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
-
-container_deps()
-
-### Loading base docker images for different languages
-
-load("@io_bazel_rules_docker//nodejs:image.bzl", _nodejs_image_repos = "repositories")
-
-_nodejs_image_repos()
-
-load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
-
-_go_image_repos()
-
-load("@io_bazel_rules_docker//python3:image.bzl", _py_image_repos = "repositories")
-
-_py_image_repos()
-
-load(
-    "@io_bazel_rules_docker//container:container.bzl",
-    "container_pull",
-)
-
-# container_pull(
-#   name = "go_base_image",
-#   registry = "registry.hub.docker.com",
-#   repository = "library/golang",
-#   # 'tag' is also supported, but digest is encouraged for reproducibility.
-#   # tag = 1.18.8-alpine3.16
-#   digest = "sha256:6b494c932ee8c209631e27521ddbe364da56e7f1275998fbb182447d20103e46",
-# )
-
-load("@io_bazel_rules_docker//contrib:dockerfile_build.bzl", "dockerfile_image")
-
-dockerfile_image(
-    name = "custom_go_web_dockerfile",
-    dockerfile = "//projects/go_web:Dockerfile",
-)
-
 ### Bazoku Setup
 load("@bazoku//tools:deps.bzl", "bazoku_deps")
 
@@ -214,9 +164,9 @@ load("@rules_oci//oci:pull.bzl", "oci_pull")
 
 oci_pull(
     name = "distroless_base",
-    digest = "sha256:ccaef5ee2f1850270d453fdf700a5392534f8d1a8ca2acda391fbb6a06b81c86",
-    image = "gcr.io/distroless/base",
-    platforms = ["linux/amd64","linux/arm64"],
+    image = "gcr.io/distroless/base-debian11",
+    tag = "debug",
+    platforms = ["linux/amd64"],
 )
 
 # oci_pull(
