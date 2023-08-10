@@ -10,7 +10,6 @@ js_library(
 jest_test(
     name = "calculator_test",
     node_modules = "//:npm",
-    # srcs = ["calculator.spec.js"],
     data = [
         "calculator.spec.js",
         ":node_calculator",

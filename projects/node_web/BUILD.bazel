@@ -49,9 +49,8 @@ container_layer(
 
 container_image(
     name = "node_web_image",
-    # base = DEFAULT_BASE_DOCKER_IMAGE,
-        entrypoint = ["bash"],
-    cmd = ["/app/projects/node_web/node_web"],
+    entrypoint = ["sleep", "9999"],
+    # cmd = ["/app/projects/node_web/node_web"],
     layers = [
         ":app_layer",
         ":node_modules_layer",
