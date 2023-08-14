@@ -1,0 +1,7 @@
+schemaVersion: 2.0.0
+fileExistenceTests:
+- name: 'Binary'
+  path: '/go_web_/go_web'
+  shouldExist: true
+  permissions: '-rwxr-xr-x'
+  isExecutableBy: 'group'

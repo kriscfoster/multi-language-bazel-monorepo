@@ -75,7 +75,7 @@ listening on port 8080
 
 ### Build & Run Go web app docker image
 ```
-➜ bazel run projects/go_web:oci_tarball --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64
+➜ bazel run projects/go_web:oci_tarball
 ...
 Loaded image: projects/go_web:oci_tarball
 ➜
