@@ -1,5 +1,5 @@
-load("@build_bazel_rules_nodejs//:index.bzl", "js_library")
-load("@npm//@bazel/jasmine:index.bzl", "jasmine_node_test")
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
 
 js_library(
     name = "node_calculator",
@@ -7,10 +7,11 @@ js_library(
     visibility = ["//projects/node_web:__pkg__"],
 )
 
-jasmine_node_test(
+jest_test(
     name = "calculator_test",
-    srcs = ["calculator.spec.js"],
     data = [
+        "calculator.spec.js",
         ":node_calculator",
     ],
+    node_modules = "//:npm",
 )

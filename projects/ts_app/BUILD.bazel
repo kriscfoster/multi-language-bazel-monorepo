@@ -1,10 +1,10 @@
-load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_config", "ts_project")
 
-nodejs_binary(
+js_binary(
     name = "ts_app",
-    data = [],
-    entry_point = ":index.js",
+    data = [":my_code/calculator.js"],
+    entry_point = ":my_code/index.js",
 )
 
 ts_config(
@@ -16,6 +16,7 @@ ts_config(
 ts_project(
     name = "my_code",
     srcs = glob(["*.ts"]),
+    out_dir = "my_code",
     tsconfig = "config",
     deps = [],
 )

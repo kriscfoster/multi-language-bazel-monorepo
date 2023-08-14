@@ -1,23 +1,43 @@
-load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
-load("@io_bazel_rules_docker//nodejs:image.bzl", "nodejs_image")
-load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@aspect_rules_js//js:defs.bzl", "js_binary", "js_image_layer")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
 
-nodejs_image(
-    name = "node_web_image",
-    binary = "node_web",
-    include_node_repo_args = False,
-    node_repository_name = "nodejs_linux_amd64",
-)
-
-nodejs_binary(
+js_binary(
     name = "node_web",
     data = [
+        "//:npm/express",
         "//projects/node_calculator",
-        "@npm//express",
     ],
     entry_point = ":index.js",
-    templated_args = [
-        "--nobazel_run_linker",
-        "--nobazel_node_patches",
+)
+
+platform(
+    name = "amd64_linux",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
     ],
+)
+
+js_image_layer(
+    name = "layers",
+    binary = ":node_web",
+    platform = ":amd64_linux",
+    root = "/app",
+)
+
+oci_image(
+    name = "oci_image",
+    # js_binary depends on bash so we have to use a base image that has bash
+    base = "@debian_base",
+    cmd = ["/app/projects/node_web/node_web"],
+    entrypoint = ["bash"],
+    tars = [
+        ":layers",
+    ],
+)
+
+oci_tarball(
+    name = "oci_tarball",
+    image = ":oci_image",
+    repo_tags = ["projects/node_web:oci_tarball"],
 )
