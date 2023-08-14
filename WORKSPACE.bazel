@@ -55,15 +55,6 @@ http_archive(
 )
 
 http_archive(
-    name = "rules_pkg",
-    sha256 = "8c20f74bca25d2d442b327ae26768c02cf3c99e93fad0381f32be9aab1967675",
-    urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.8.1/rules_pkg-0.8.1.tar.gz",
-        "https://github.com/bazelbuild/rules_pkg/releases/download/0.8.1/rules_pkg-0.8.1.tar.gz",
-    ],
-)
-
-http_archive(
     name = "bazoku",
     sha256 = "bb12e93d3319c670427decaa2240e1c2afc3e09ffd179bf4e11210313b9be6ba",
     urls = ["https://github.com/salesforce/bazoku/releases/download/v0.2.0/bazoku-v0.2.0.tar.gz"],
