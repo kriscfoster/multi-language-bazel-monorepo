@@ -16,7 +16,7 @@ ts_config(
 ts_project(
     name = "my_code",
     srcs = glob(["*.ts"]),
+    out_dir = "my_code",
     tsconfig = "config",
     deps = [],
-    out_dir = "my_code"
 )

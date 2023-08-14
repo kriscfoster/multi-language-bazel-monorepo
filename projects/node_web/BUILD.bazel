@@ -4,15 +4,24 @@ load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
 js_binary(
     name = "node_web",
     data = [
-        "//projects/node_calculator",
         "//:npm/express",
+        "//projects/node_calculator",
     ],
     entry_point = ":index.js",
+)
+
+platform(
+    name = "amd64_linux",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ],
 )
 
 js_image_layer(
     name = "layers",
     binary = ":node_web",
+    platform = ":amd64_linux",
     root = "/app",
 )
 

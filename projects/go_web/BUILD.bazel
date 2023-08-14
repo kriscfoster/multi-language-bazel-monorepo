@@ -28,9 +28,9 @@ pkg_tar(
 oci_image(
     name = "oci_image",
     base = "@distroless_base",
-    tars = [":tar"],
     # with :debug distroless image, entrypoint can be changed to "sh" for debug purposes
     entrypoint = ["go_web_/go_web"],
+    tars = [":tar"],
 )
 
 oci_tarball(

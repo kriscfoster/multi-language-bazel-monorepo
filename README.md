@@ -64,13 +64,12 @@ I wanted to try to set up a multi-language monorepo using [bazel](https://bazel.
 ### Build & Run NodeJS web app docker image
 
 ```
-➜ bazel run projects/node_web:node_web_image -- --norun
+➜ bazel run projects/node_web:oci_tarball
 ...
-INFO: Build completed successfully, 1 total action
-Loaded image ID: sha256:XXX
-Tagging YYY as bazel/projects/node_web:node_web_image
-➜
-➜ docker run -p 8080:8080 bazel/projects/node_web:node_web_image
+Loaded image: projects/node_web:oci_tarball
+...
+➜ docker run -p 8080:8080 projects/node_web:oci_tarball
+...
 listening on port 8080
 ```
 
@@ -82,27 +81,6 @@ Loaded image: projects/go_web:oci_tarball
 ➜
 ➜ docker run -p 8080:8080 projects/go_web:oci_tarball
 2022/05/30 20:35:51 Going to listen on port 8080
-```
-
-### Build & Run Python web app docker image
-```
-➜ bazel run projects/python_web:python_web_image -- --norun
-...
-INFO: Build completed successfully, 1 total action
-Loaded image ID: sha256:XXX
-Tagging YYY as bazel/projects/python_web:python_web_image
-➜
-➜ docker run -p 5000:5000 bazel/projects/python_web:python_web_image
-...
-* Running on http://127.0.0.1:5000
-```
-
-### Publishing Python web app docker image
-```
-➜ bazel run projects/python_web:publish         
-...
-INFO: Build completed successfully, 1 total action
-2022/06/24 20:13:33 Successfully pushed Docker image to registry.hub.docker.com/krisfoster96/monorepo-python-web:1 - registry.hub.docker.com/krisfoster96/monorepo-python-web@sha256:024bcf5dd677d6fbce32fcf9d09329f4c80931cc12c90965bb397af1f497bf39
 ```
 
 ### Deploying Go web app to Heroku

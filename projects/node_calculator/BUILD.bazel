@@ -9,9 +9,9 @@ js_library(
 
 jest_test(
     name = "calculator_test",
-    node_modules = "//:npm",
     data = [
         "calculator.spec.js",
         ":node_calculator",
     ],
+    node_modules = "//:npm",
 )
