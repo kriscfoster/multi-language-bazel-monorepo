@@ -229,7 +229,10 @@ oci_pull(
     name = "distroless_base",
     image = "gcr.io/distroless/base-debian11",
     tag = "debug",
-    platforms = ["linux/amd64"],
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+    ],
 )
 
 oci_pull(

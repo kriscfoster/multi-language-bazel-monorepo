@@ -16,34 +16,68 @@ go_library(
 )
 
 go_binary(
-    name = "go_web",
+    name = "go_web_amd64",
     embed = [":go_web_lib"],
     visibility = ["//visibility:public"],
+    goos = "linux",
+    goarch = "amd64",
+)
+
+go_binary(
+    name = "go_web_arm64",
+    embed = [":go_web_lib"],
+    visibility = ["//visibility:public"],
+    goos = "linux",
+    goarch = "arm64",
 )
 
 pkg_tar(
-    name = "tar",
-    srcs = [":go_web"],
+    name = "tar_amd64",
+    srcs = [":go_web_amd64"],
+)
+
+pkg_tar(
+    name = "tar_arm64",
+    srcs = [":go_web_arm64"],
 )
 
 oci_image(
-    name = "oci_image",
+    name = "oci_image_arm64",
     base = "@distroless_base",
     # with :debug distroless image, entrypoint can be changed to "sh" for debug purposes
-    entrypoint = ["go_web_/go_web"],
-    tars = [":tar"],
+    entrypoint = ["sh"],
+    tars = [":tar_arm64"],
+    architecture = select({
+        "@platforms//cpu:arm64": "arm64",
+        "@platforms//cpu:x86_64": "amd64",
+    }),
+
+)
+
+oci_image(
+    name = "oci_image_amd64",
+    base = "@distroless_base",
+    # with :debug distroless image, entrypoint can be changed to "sh" for debug purposes
+    entrypoint = ["sh"],
+    tars = [":tar_amd64"],
 )
 
 container_structure_test(
     name = "container_structure_test",
     configs = ["container_test.yaml"],
-    image = ":oci_image",
+    image = ":oci_image_arm64",
 )
 
 oci_tarball(
-    name = "oci_tarball",
-    image = ":oci_image",
-    repo_tags = ["projects/go_web:oci_tarball"],
+    name = "oci_tarball_arm64",
+    image = ":oci_image_arm64",
+    repo_tags = ["projects/go_web:oci_tarball_arm64"],
+)
+
+oci_tarball(
+    name = "oci_tarball_amd64",
+    image = ":oci_image_amd64",
+    repo_tags = ["projects/go_web:oci_tarball_amd64"],
 )
 
 bazoku(
