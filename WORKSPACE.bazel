@@ -226,11 +226,19 @@ rules_pkg_dependencies()
 load("@rules_oci//oci:pull.bzl", "oci_pull")
 
 oci_pull(
-    name = "distroless_base",
+    name = "distroless_base_amd64",
     image = "gcr.io/distroless/base-debian11",
     tag = "debug",
     platforms = [
         "linux/amd64",
+    ],
+)
+
+oci_pull(
+    name = "distroless_base_arm64",
+    image = "gcr.io/distroless/base-debian11",
+    tag = "debug",
+    platforms = [
         "linux/arm64",
     ],
 )

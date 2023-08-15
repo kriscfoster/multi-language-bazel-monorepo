@@ -43,20 +43,15 @@ pkg_tar(
 
 oci_image(
     name = "oci_image_arm64",
-    base = "@distroless_base",
+    base = "@distroless_base_arm64",
     # with :debug distroless image, entrypoint can be changed to "sh" for debug purposes
     entrypoint = ["sh"],
-    tars = [":tar_arm64"],
-    architecture = select({
-        "@platforms//cpu:arm64": "arm64",
-        "@platforms//cpu:x86_64": "amd64",
-    }),
-
+    tars = [":tar_amd64"],
 )
 
 oci_image(
     name = "oci_image_amd64",
-    base = "@distroless_base",
+    base = "@distroless_base_amd64",
     # with :debug distroless image, entrypoint can be changed to "sh" for debug purposes
     entrypoint = ["sh"],
     tars = [":tar_amd64"],
