@@ -1,2 +1,0 @@
-# common --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64
-# common @io_bazel_rules_go//go/toolchain:cgo_off

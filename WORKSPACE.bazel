@@ -46,19 +46,11 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.7.0/rules_nodejs-5.7.0.tar.gz"],
 )
 
-
-# http_archive(
-#     name = "rules_oci",
-#     sha256 = "176e601d21d1151efd88b6b027a24e782493c5d623d8c6211c7767f306d655c8",
-#     strip_prefix = "rules_oci-1.2.0",
-#     url = "https://github.com/bazel-contrib/rules_oci/releases/download/v1.2.0/rules_oci-v1.2.0.tar.gz",
-# )
-
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-git_repository(
+http_archive(
     name = "rules_oci",
-    commit = "e4db7bd30c1df10820ea77673abdf293044387cf",
-    remote = "https://github.com/illicitonion/rules_oci.git",
+    sha256 = "176e601d21d1151efd88b6b027a24e782493c5d623d8c6211c7767f306d655c8",
+    strip_prefix = "rules_oci-1.2.0",
+    url = "https://github.com/bazel-contrib/rules_oci/releases/download/v1.2.0/rules_oci-v1.2.0.tar.gz",
 )
 
 http_archive(
@@ -228,16 +220,3 @@ oci_pull(
 #     digest = "sha256:161a1d97d592b3f1919801578c3a47c8e932071168a96267698f4b669c24c76d",
 #     image = "gcr.io/distroless/java17",
 # )
-
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-http_archive(
-    name = "aspect_bazel_lib",
-    sha256 = "44f4f6d1ea1fc5a79ed6ca83f875038fee0a0c47db4f9c9beed097e56f8fad03",
-    strip_prefix = "bazel-lib-1.34.0",
-    url = "https://github.com/aspect-build/bazel-lib/releases/download/v1.34.0/bazel-lib-v1.34.0.tar.gz",
-)
-
-load("@aspect_bazel_lib//lib:repositories.bzl", "aspect_bazel_lib_dependencies")
-
-aspect_bazel_lib_dependencies()
