@@ -76,7 +76,7 @@ oci_image_index(
 oci_push(
     name = "publish",
     repository = "registry.hub.docker.com/krisfoster96/monorepo-go-web",
-    remote_tags = ["5"],
+    remote_tags = ["6"],
     image = ":multi_arch_image",
 )
 

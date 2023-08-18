@@ -86,6 +86,30 @@ Loaded image: projects/go_web:oci_tarball
 ### Deploying Go web app to Heroku
 
 ```
-➜ bazel** run projects/go_web:bazoku-deployment --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64
+➜ bazel run projects/go_web:bazoku-deployment --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64
 ...
+```
+
+### Publishing Multi-arch Docker image to DockerHub
+
+```
+➜ bazel run examples/multi_arch_go:publish
+...
+2023/08/18 16:41:38 registry.hub.docker.com/krisfoster96/monorepo-go-web:6: digest: sha256:c50ffe127f340301993cbc323e510211d6dab9a547aa1b1a81035426e4e9d1b1 size: 648
+```
+
+```
+➜ docker buildx imagetools inspect registry.hub.docker.com/krisfoster96/monorepo-go-web:6
+Name:      registry.hub.docker.com/krisfoster96/monorepo-go-web:6
+MediaType: application/vnd.oci.image.index.v1+json
+Digest:    sha256:c50ffe127f340301993cbc323e510211d6dab9a547aa1b1a81035426e4e9d1b1
+           
+Manifests: 
+  Name:      registry.hub.docker.com/krisfoster96/monorepo-go-web:6@sha256:18b8c8a2606c3daf70a86db275c850080353bf5bd79a7045cca6732736b693c3
+  MediaType: application/vnd.oci.image.manifest.v1+json
+  Platform:  linux/arm64
+             
+  Name:      registry.hub.docker.com/krisfoster96/monorepo-go-web:6@sha256:fbc6e9ca088bbb683c0743b16aa98b51583e7af8564febd26154e638b12b484a
+  MediaType: application/vnd.oci.image.manifest.v1+json
+  Platform:  linux/amd64
 ```
