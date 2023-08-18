@@ -1,18 +1,7 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar")
-load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball", "oci_image_index", "oci_push")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball", "oci_image_index")
 load("@bazoku//:bazoku.bzl", "bazoku")
-load(":transition.bzl", "multi_arch")
-load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_binary")
-
-platform(
-    name = "arm64_linux",
-    constraint_values = [
-        "@platforms//os:linux",
-        "@platforms//cpu:arm64",
-        "@io_bazel_rules_go//go/toolchain:cgo_off",  # https://github.com/bazelbuild/rules_go/pull/3390
-    ],
-)
 
 go_library(
     name = "go_web_lib",
@@ -32,12 +21,6 @@ go_binary(
 
 )
 
-platform_transition_binary(
-    name = "transitioned_go_binary_arm64",
-    binary = ":go_web",
-    target_platform = "arm64_linux",
-)
-
 pkg_tar(
     name = "tar",
     srcs = [":go_web"],
@@ -49,31 +32,6 @@ oci_image(
     # with :debug distroless image, entrypoint can be changed to "sh" for debug purposes
     entrypoint = ["go_web_/go_web"],
     tars = [":tar"],
-)
-
-platform(
-    name = "linux_arm64",
-    constraint_values = [
-        "@platforms//os:linux",
-        "@platforms//cpu:arm64",
-    ],
-)
-
-platform(
-    name = "linux_amd64",
-    constraint_values = [
-        "@platforms//os:linux",
-        "@platforms//cpu:x86_64",
-    ],
-)
-
-multi_arch(
-    name = "images",
-    image = ":oci_image",
-    platforms = [
-        ":linux_arm64",
-        ":linux_amd64",
-    ],
 )
 
 archs = ["arm64", "amd64"]
@@ -109,28 +67,18 @@ archs = ["arm64", "amd64"]
 ]
 
 oci_image_index(
-    name = "app",
+    name = "multi_arch_image",
     images = [
         ":oci_image_arm64",
         ":oci_image_amd64"
     ],
 )
 
-oci_push(
-    name = "publish",
-    repository = "registry.hub.docker.com/krisfoster96/monorepo-go-web",
-    remote_tags = ["latest"],
-    image = ":app",
+oci_tarball(
+    name = "oci_tarball_multi_arch",
+    image = ":multi_arch_image",
+    repo_tags = ["projects/go_web:oci_tarball_multi_arch"],
 )
-
-[
-    oci_tarball(
-        name = "oci_tarball_" + arch,
-        image = ":oci_image_" + arch,
-        repo_tags = ["projects/go_web:oci_tarball_" + arch],
-    )
-    for arch in archs
-]
 
 bazoku(
     name = "bazoku-deployment",
