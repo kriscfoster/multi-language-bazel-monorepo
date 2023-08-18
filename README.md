@@ -113,3 +113,19 @@ Manifests:
   MediaType: application/vnd.oci.image.manifest.v1+json
   Platform:  linux/amd64
 ```
+
+```
+➜ docker run --platform linux/arm64 registry.hub.docker.com/krisfoster96/monorepo-go-web:6
+...
+2023/08/18 15:56:08 running program's operating system target: linux
+2023/08/18 15:56:08 running program's architecture target: arm64
+2023/08/18 15:56:08 Going to listen on port: 8080
+```
+
+```
+➜ docker run --platform linux/amd64 registry.hub.docker.com/krisfoster96/monorepo-go-web:6
+...
+2023/08/18 15:56:08 running program's operating system target: linux
+2023/08/18 15:56:08 running program's architecture target: amd64
+2023/08/18 15:56:08 Going to listen on port: 8080
+```
