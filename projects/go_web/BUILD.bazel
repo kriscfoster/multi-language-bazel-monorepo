@@ -1,6 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar")
-load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball", "oci_image_index")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball", "oci_image_index", "oci_push")
 load("@bazoku//:bazoku.bzl", "bazoku")
 
 go_library(
@@ -58,7 +58,7 @@ archs = ["arm64", "amd64"]
 [
     oci_image(
         name = "oci_image_" + arch,
-        base = "@distroless_base",
+        base = "@distroless_base_linux_" + arch,
         # with :debug distroless image, entrypoint can be changed to "sh" for debug purposes
         entrypoint = ["go_web_arm64_/go_web_" + arch],
         tars = [":tar_" + arch],
@@ -72,6 +72,13 @@ oci_image_index(
         ":oci_image_arm64",
         ":oci_image_amd64"
     ],
+)
+
+oci_push(
+    name = "publish",
+    repository = "registry.hub.docker.com/krisfoster96/monorepo-go-web",
+    remote_tags = ["latest"],
+    image = ":multi_arch_image",
 )
 
 oci_tarball(
