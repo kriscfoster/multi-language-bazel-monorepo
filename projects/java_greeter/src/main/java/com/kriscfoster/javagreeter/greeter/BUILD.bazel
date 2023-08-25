@@ -1,6 +1,8 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
 java_library(
-    name = "java_greeter",
+    name = "greeter",
     srcs = ["Greeter.java"],
-    visibility = ["//projects/java_greeter/src/main/java/com/kriscfoster/javagreeter/main:__subpackages__"],
+    visibility = ["//:__subpackages__"],
     deps = ["@maven//:com_github_javafaker_javafaker"],
 )
