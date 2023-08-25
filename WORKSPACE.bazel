@@ -25,10 +25,10 @@ http_archive(
 
 http_archive(
     name = "bazel_gazelle",
-    sha256 = "727f3e4edd96ea20c29e8c2ca9e8d2af724d8c7778e7923a854b2c80952bc405",
+    sha256 = "29218f8e0cebe583643cbf93cae6f971be8a2484cdcfa1e45057658df8d54002",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.30.0/bazel-gazelle-v0.30.0.tar.gz",
-        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.30.0/bazel-gazelle-v0.30.0.tar.gz",
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.32.0/bazel-gazelle-v0.32.0.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.32.0/bazel-gazelle-v0.32.0.tar.gz",
     ],
 )
 
@@ -221,3 +221,95 @@ oci_pull(
 #     digest = "sha256:161a1d97d592b3f1919801578c3a47c8e932071168a96267698f4b669c24c76d",
 #     image = "gcr.io/distroless/java17",
 # )
+
+
+http_archive(
+    name = "contrib_rules_jvm",
+    sha256 = "bd0f82def1879df85ff0a80767e6455911e1c9c1eac5db1de8f68dcccd4a3d7a",
+    strip_prefix = "rules_jvm-0.18.0",
+    url = "https://github.com/bazel-contrib/rules_jvm/releases/download/v0.18.0/rules_jvm-v0.18.0.tar.gz",
+)
+
+load("@contrib_rules_jvm//:repositories.bzl", "contrib_rules_jvm_deps", "contrib_rules_jvm_gazelle_deps")
+
+contrib_rules_jvm_deps()
+
+contrib_rules_jvm_gazelle_deps()
+
+load("@contrib_rules_jvm//:setup.bzl", "contrib_rules_jvm_setup")
+
+contrib_rules_jvm_setup()
+
+load("@contrib_rules_jvm//:gazelle_setup.bzl", "contrib_rules_jvm_gazelle_setup")
+
+contrib_rules_jvm_gazelle_setup()
+
+http_archive(
+    name = "zlib",
+    urls = [
+        "https://github.com/madler/zlib/archive/v1.2.11.tar.gz",
+    ],
+    strip_prefix = "zlib-1.2.11",
+    sha256 = "629380c90a77b964d896ed37163f5c3a34f6e6d897311f1df2a7016355c45eff",
+    build_file_content = """
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])  # BSD/MIT-like license (for zlib)
+
+_ZLIB_HEADERS = [
+"crc32.h",
+"deflate.h",
+"gzguts.h",
+"inffast.h",
+"inffixed.h",
+"inflate.h",
+"inftrees.h",
+"trees.h",
+"zconf.h",
+"zlib.h",
+"zutil.h",
+]
+
+_ZLIB_PREFIXED_HEADERS = ["zlib/include/" + hdr for hdr in _ZLIB_HEADERS]
+
+# In order to limit the damage from the `includes` propagation
+# via `:zlib`, copy the public headers to a subdirectory and
+# expose those.
+genrule(
+name = "copy_public_headers",
+srcs = _ZLIB_HEADERS,
+outs = _ZLIB_PREFIXED_HEADERS,
+cmd = "cp $(SRCS) $(@D)/zlib/include/",
+visibility = ["//visibility:private"],
+)
+
+cc_library(
+name = "zlib",
+srcs = [
+    "adler32.c",
+    "compress.c",
+    "crc32.c",
+    "deflate.c",
+    "gzclose.c",
+    "gzlib.c",
+    "gzread.c",
+    "gzwrite.c",
+    "infback.c",
+    "inffast.c",
+    "inflate.c",
+    "inftrees.c",
+    "trees.c",
+    "uncompr.c",
+    "zutil.c",
+    # Include the un-prefixed headers in srcs to work
+    # around the fact that zlib isn't consistent in its
+    # choice of <> or "" delimiter when including itself.
+] + _ZLIB_HEADERS,
+hdrs = _ZLIB_PREFIXED_HEADERS,
+copts = [
+    "-Wno-unused-variable",
+    "-Wno-implicit-function-declaration",
+],
+includes = ["zlib/include/"],
+)""",
+)
