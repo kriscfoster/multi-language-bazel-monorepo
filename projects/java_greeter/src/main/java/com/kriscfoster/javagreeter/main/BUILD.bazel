@@ -1,6 +1,15 @@
-java_binary(
+load("@rules_java//java:defs.bzl", "java_binary", "java_library")
+
+java_library(
     name = "main",
     srcs = ["Main.java"],
-    main_class = "com.kriscfoster.javagreeter/main.Main",
-    deps = ["//projects/java_greeter/src/main/java/com/kriscfoster/javagreeter/greeter:java_greeter"],
+    visibility = ["//:__subpackages__"],
+    deps = ["//projects/java_greeter/src/main/java/com/kriscfoster/javagreeter/greeter"],
+)
+
+java_binary(
+    name = "Main",
+    main_class = "com.kriscfoster.javagreeter.main.Main",
+    visibility = ["//visibility:public"],
+    runtime_deps = [":main"],
 )
