@@ -168,9 +168,15 @@ rules_jvm_external_setup()
 
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
+# when the list of dependencies changes
+# bazel run @unpinned_maven//:pin
 maven_install(
     artifacts = [
-        "com.github.javafaker:javafaker:1.0.2"
+        "com.github.javafaker:javafaker:1.0.2",
+        "org.junit.jupiter:junit-jupiter-api:5.10.0",
+        "org.junit.jupiter:junit-jupiter-engine:5.10.0",
+        "org.junit.platform:junit-platform-launcher:1.10.0",
+        "org.junit.platform:junit-platform-reporting:1.10.0",
     ],
     repositories = [
         "https://maven.google.com",
