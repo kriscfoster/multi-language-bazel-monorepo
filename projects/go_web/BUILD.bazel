@@ -83,7 +83,7 @@ oci_push(
 oci_tarball(
     name = "oci_tarball_amd64",
     image = ":oci_image_amd64",
-    repo_tags = ["projects/go_web:oci_tarball_amd_64"],
+    repo_tags = ["projects/go_web:oci_tarball_amd64"],
 )
 
 bazoku(
