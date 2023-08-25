@@ -46,7 +46,6 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.7.0/rules_nodejs-5.7.0.tar.gz"],
 )
 
-
 http_archive(
     name = "rules_oci",
     sha256 = "176e601d21d1151efd88b6b027a24e782493c5d623d8c6211c7767f306d655c8",
@@ -212,7 +211,7 @@ oci_pull(
     name = "distroless_base",
     image = "gcr.io/distroless/base-debian11",
     tag = "debug",
-    platforms = ["linux/amd64"],
+    platforms = ["linux/amd64", "linux/arm64"],
 )
 
 oci_pull(
