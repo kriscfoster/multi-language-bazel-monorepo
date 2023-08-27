@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: bazelbuild/setup-bazelisk@v1
+      - uses: bazelbuild/setup-bazelisk@v2
       - run: git config --global user.name ${{ secrets.USERNAME  }}
       - run: git config --global user.email ${{ secrets.EMAIL }}
       - uses: extractions/netrc@v1
