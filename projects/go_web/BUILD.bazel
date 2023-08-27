@@ -14,25 +14,6 @@ go_library(
     ],
 )
 
-go_binary(
-    name = "go_web",
-    embed = [":go_web_lib"],
-    visibility = ["//visibility:public"],
-)
-
-pkg_tar(
-    name = "tar",
-    srcs = [":go_web"],
-)
-
-oci_image(
-    name = "oci_image",
-    base = "@distroless_base",
-    # with :debug distroless image, entrypoint can be changed to "sh" for debug purposes
-    entrypoint = ["go_web_/go_web"],
-    tars = [":tar"],
-)
-
 archs = [
     "arm64",
     "amd64",
@@ -68,6 +49,15 @@ archs = [
     for arch in archs
 ]
 
+[
+    oci_tarball(
+        name = "oci_tarball_" + arch,
+        image = ":oci_image_" + arch,
+        repo_tags = ["projects/go_web:oci_tarball_" + arch],
+    )
+    for arch in archs
+]
+
 oci_image_index(
     name = "multi_arch_image",
     images = [
@@ -83,14 +73,14 @@ oci_push(
     repository = "registry.hub.docker.com/krisfoster96/monorepo-go-web",
 )
 
-oci_tarball(
-    name = "oci_tarball_amd64",
-    image = ":oci_image_amd64",
-    repo_tags = ["projects/go_web:oci_tarball_amd64"],
-)
-
 bazoku(
     name = "bazoku-deployment",
-    binary = ":go_web",
+    binary = ":go_web_amd64",
     heroku_app_name = "my-bazoku-app",
+)
+
+go_binary(
+    name = "go_web",
+    embed = [":go_web_lib"],
+    visibility = ["//visibility:public"],
 )
