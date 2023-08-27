@@ -73,14 +73,28 @@ Loaded image: projects/node_web:oci_tarball
 listening on port 8080
 ```
 
-### Build & Run Go web app docker image
+### Build & Run Go web app docker image (amd64)
 ```
-➜ bazel run projects/go_web:oci_tarball --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64
+➜ bazel run projects/go_web:oci_tarball_amd64
 ...
-Loaded image: projects/go_web:oci_tarball
+Loaded image: projects/go_web:oci_tarball_amd64
 ➜
-➜ docker run -p 8080:8080 projects/go_web:oci_tarball
-2022/05/30 20:35:51 Going to listen on port 8080
+➜ docker run projects/go_web:oci_tarball_amd64
+2023/08/27 13:40:22 running program's operating system target: linux
+2023/08/27 13:40:22 running program's architecture target: amd64
+2023/08/27 13:40:22 Going to listen on port: 8080
+```
+
+### Build & Run Go web app docker image (arm64)
+```
+➜ bazel run projects/go_web:oci_tarball_arm64
+...
+Loaded image: projects/go_web:oci_tarball_arm64
+➜
+➜ docker run projects/go_web:oci_tarball_arm64
+2023/08/27 13:40:58 running program's operating system target: linux
+2023/08/27 13:40:58 running program's architecture target: arm64
+2023/08/27 13:40:58 Going to listen on port: 8080
 ```
 
 ### Deploying Go web app to Heroku
