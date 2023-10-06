@@ -71,6 +71,13 @@ oci_image_index(
     ],
 )
 
+oci_tarball(
+    name = "multi_arch_tarball",
+    format = "oci",
+    image = ":multi_arch_image",
+    repo_tags = ["projects/go_web:oci_tarball_multi_arch"],
+)
+
 oci_push(
     name = "publish",
     image = ":multi_arch_image",

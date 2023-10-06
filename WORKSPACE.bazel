@@ -46,11 +46,19 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.7.0/rules_nodejs-5.7.0.tar.gz"],
 )
 
-http_archive(
+# http_archive(
+#     name = "rules_oci",
+#     sha256 = "176e601d21d1151efd88b6b027a24e782493c5d623d8c6211c7767f306d655c8",
+#     strip_prefix = "rules_oci-1.2.0",
+#     url = "https://github.com/bazel-contrib/rules_oci/releases/download/v1.2.0/rules_oci-v1.2.0.tar.gz",
+# )
+
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+git_repository(
     name = "rules_oci",
-    sha256 = "176e601d21d1151efd88b6b027a24e782493c5d623d8c6211c7767f306d655c8",
-    strip_prefix = "rules_oci-1.2.0",
-    url = "https://github.com/bazel-contrib/rules_oci/releases/download/v1.2.0/rules_oci-v1.2.0.tar.gz",
+    commit = "3a94776886bf044261d56c97246bc4c11ed76cdc",
+    remote = "https://github.com/illicitonion/rules_oci.git",
+    verbose = False,
 )
 
 http_archive(
